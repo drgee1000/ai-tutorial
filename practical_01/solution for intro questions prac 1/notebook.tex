@@ -1,0 +1,1008 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{prac1\_solution}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Introduction to Data Mining}\label{introduction-to-data-mining}
+
+    This is the first tutorial - it provides a quick introduction to Python
+and IPython.
+
+    \subsubsection{Python}\label{python}
+
+    Python is a programming language that has been growing in popularity in
+recent years. There are many reasons for this, but it mostly comes down
+to Python being easy to learn and use as well as the fact that Python
+has a very active community that develops amazing extensions to Python!
+
+Python has become one of the most frequently used languages in the world
+of data science due to the ability to almost instantly apply it to a
+large number of data science problems. When asking companies in
+different industries and of various sizes what lanuage they would like
+their data scientists to know when coming in, they almost all agree that
+Python is the best choice.
+
+Most of you have had experience in Java. Both share many characteristics
+given they are both programming languages and many structures and
+concepts will be familiar. However, there are differences. You may find
+you prefer python and it may allow you to be more productive, not just
+because of the provision of many libraries which implement Data Mining
+algorithms.
+
+Some key differences between Python and Java are: - Python is
+dynamically typed while Java is statically typed, this has various
+implications including you never need to declare variables in Python -
+Python code is more concise (briefer) - Python is more compact
+
+For example, the following program is in Java: public class HelloWorld
+\{ public static void main (String{[}{]} args) \{
+System.out.println("Hellold!"); \} \}
+
+In Python the equivalent program is print("Hello, world!") \# Python
+version 3
+
+    \subsubsection{Python? IPython? IPython notebooks? What is all of
+this?}\label{python-ipython-ipython-notebooks-what-is-all-of-this}
+
+    What is all of this? - Python? - IPython? - IPython notebooks?
+
+For you, these terms may be confusing? Don't worry its ok...
+
+Python is a lanuage. A computer programming language. It is very popular
+in lots of industries. It has been around for over 30 years. Development
+of Python started in December 1989 by Guido van Rossum at Centrum
+Wiskunde \& Informatica (CWI) in the Netherlands.
+
+IPython (with an I) is an extension to Python. It was created by
+scientists for scientists. It is typically used in computer science,
+machine learning, and physics research. It simply adds some new features
+to Python. Writing code in either of these is generally done in a long
+text document with a ton of code that can be pretty duanting to a
+someone new to the world of programming.
+
+IPython Notebooks (with an I, there is no such thing as a Python
+notebook) is what we are looking at right now. It is a web browser based
+way of writing Python code. One of the benefits is that it allows you to
+write in plain text to create, what should feel like, a notebook. The
+closest analog here would be to relate an IPython notebook to a typical
+lab notebook kept by "traditional" researchers. Anyone coming from
+chemistry or biology will probably understand what I mean. We will be
+using IPython notebooks for the rest of the semester. A majority of your
+class notes will be presented in this format. This will allow us to both
+have a place for discussion and instruction, but with the added benefit
+of allowing us to play with data live!
+
+The rest of this document will be broken into two main pieces: an
+introduction to IPython notebooks (how to use them) and then an
+introduction to the world of Python programming.
+
+    \subsubsection{IPython Notebooks}\label{ipython-notebooks}
+
+    IPython notebooks are made up of cells. There are two basics types of
+entries in an IPython notebook: text cells, and code cells.
+
+You can edit a cell by double clicking on it. You can get it back to the
+display mode by pressing the "Run" button from the toolbar. Try it! To
+switch between text and code cells, just click a cell and go to "Cell
+\textgreater{} Cell Type" in the menu bar (or use the toolbar).
+
+    \paragraph{Text Cells}\label{text-cells}
+
+    Let's start a new cell and add a little bit more text.
+
+You can do text formatting. For example, you can use asterisks or
+underscores to emphasize things. Double asterisks are used to make
+things bold.
+
+If you know what LaTeX is, you can write directly in LaTeX by wrapping
+it in dollar signs, \(x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}\). Learning
+\(\LaTeX\) is great for typesetting math formulas.
+
+Creating a bulleted list is pretty easy: - One - Two - Three
+
+It is also very easy to make a numbered list: 1. One 1. Two 1. Three
+
+For a numbered list, start with 1. followed by a space, then it starts
+numbering for you. Start each line with some number (any number) and a
+period, then a space. Tab to indent to get subnumbering.
+
+This covers almost all of the text formatting you will need to learn. If
+you are ever stuck, just Google "Markdown syntax" since the language the
+formatting is done in is called Markdown.
+
+    \paragraph{Code Cells}\label{code-cells}
+
+    Now, we will see a "code" cell. Here, we simply type any Python code and
+then click "Run". When we run a cell, the code in it is executed and
+remembered for as long as we keep this window open - this means if you
+create a variable in a code cell you can refer to the variable by its
+name in other subsequent cells. Code cells will always start with "In
+{[} {]}:". Code cells are the default for any new cell.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{x} \PY{o}{=} \PY{l+m+mi}{5} \PY{o}{+} \PY{l+m+mi}{10}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n+nb}{print} \PY{p}{(}\PY{n}{x}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+15
+
+    \end{Verbatim}
+
+    You can include more complex expressions or programs in a cell as well:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{x} \PY{o}{=} \PY{l+m+mi}{5} \PY{o}{+} \PY{l+m+mi}{1}
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The value of x is }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Output: Hi! This is a cell. Press the ▶| button above to run it}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The value of x is 6.
+Output: Hi! This is a cell. Press the ▶| button above to run it
+
+    \end{Verbatim}
+
+    Instead of clicking "Play" button, you can run a cell with Ctrl + Enter
+or Shift + Enter. Experiment with both of those to see what the
+difference is.
+
+    \subsubsection{Python}\label{python}
+
+    Let us now examine some of the key elements of Python
+
+    \paragraph{Variables and data types}\label{variables-and-data-types}
+
+    Variables are used to store data. This data can be of a variety of
+types. Integer numbers, floating (decimal numbers), lists, strings, etc.
+Let's take a look at some of these:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{some\PYZus{}integer} \PY{o}{=} \PY{l+m+mi}{5}
+        \PY{n}{some\PYZus{}float} \PY{o}{=} \PY{l+m+mf}{7.1}
+        \PY{n}{some\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{]}
+        \PY{n}{some\PYZus{}string} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Rob}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    We can print out these variables.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n+nb}{print} \PY{p}{(}\PY{n}{some\PYZus{}integer}\PY{p}{)}
+        \PY{n+nb}{print} \PY{p}{(}\PY{n}{some\PYZus{}float}\PY{p}{)}
+        \PY{n+nb}{print} \PY{p}{(}\PY{n}{some\PYZus{}list}\PY{p}{)}
+        \PY{n+nb}{print} \PY{p}{(}\PY{n}{some\PYZus{}string}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+5
+7.1
+[1, 2, 3, 4]
+Rob
+
+    \end{Verbatim}
+
+    What if I want to print some text and then some numbers? One easy way to
+do this is to realize that printing will always want string data. If you
+have data that is not a string (like an integer or float), you can
+convert it to a string.
+
+    print ("My integer was " + str(some\_integer) + ".")
+
+    It is always a good practice to convert everything to a string when
+printing it out such as by using the function str().
+
+Now we look at some basic maths.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{some\PYZus{}integer} \PY{o}{+} \PY{n}{some\PYZus{}float}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} 12.1
+\end{Verbatim}
+            
+    We can store this as a new variable to use later,
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{my\PYZus{}sum} \PY{o}{=} \PY{n}{some\PYZus{}integer} \PY{o}{+} \PY{n}{some\PYZus{}float}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n+nb}{print} \PY{p}{(}\PY{n}{my\PYZus{}sum}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+12.1
+
+    \end{Verbatim}
+
+    What about that list we had? What does that mean? A list is exactly what
+it sounds like. It's a way to keep a collection of things in order. We
+can check to see how long our list is,
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n+nb}{print}\PY{p}{(} \PY{n+nb}{len}\PY{p}{(}\PY{n}{some\PYZus{}list}\PY{p}{)} \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+4
+
+    \end{Verbatim}
+
+    This looks good. Our list contained the numbers 1 through 4. What if we
+want a particular item from the list? How do we look at just the first
+item? To do a lookup, we use square brackets. Notice that when we
+created the list originally, we also used square brackets!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n+nb}{print}\PY{p}{(} \PY{n}{some\PYZus{}list}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+2
+
+    \end{Verbatim}
+
+    That's the second item, not the first! In Python (and almost every other
+language), counting start at zero! To get the first item we should look
+in the 0th space,
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n+nb}{print}\PY{p}{(} \PY{n}{some\PYZus{}list}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1
+
+    \end{Verbatim}
+
+    Adding things to the list is done using the append method,
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{some\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n+nb}{print} \PY{p}{(}\PY{n}{some\PYZus{}list}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1, 2, 3, 4, 5]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Play around here!}
+        \PY{c+c1}{\PYZsh{} By the way, the pound (hash) symbol here is used to indicate a comment in code.}
+\end{Verbatim}
+
+
+    \paragraph{Functions}\label{functions}
+
+    We have already used these twice! Functions allow us to do predefined
+operations. Functions are usually some sensible English word ending in
+open-and-close parentheses. One example is the s
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n+nb}{str}\PY{p}{(}\PY{l+m+mf}{5.124}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} '5.124'
+\end{Verbatim}
+            
+    We also used the append() function to add stuff to a list.
+
+If we knew we had to do some operation many times, and wanted to save a
+bit of time, we could define our own function. For example, consider
+having to calculate the area of a circle.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{k}{def} \PY{n+nf}{area\PYZus{}of\PYZus{}a\PYZus{}circle}\PY{p}{(}\PY{n}{radius}\PY{p}{)}\PY{p}{:}
+             \PY{n}{area} \PY{o}{=} \PY{l+m+mf}{3.14} \PY{o}{*} \PY{n}{radius} \PY{o}{*} \PY{n}{radius}
+             \PY{k}{return} \PY{n}{area}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{circle\PYZus{}area} \PY{o}{=} \PY{n}{area\PYZus{}of\PYZus{}a\PYZus{}circle}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(} \PY{n}{circle\PYZus{}area} \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+78.5
+
+    \end{Verbatim}
+
+    This function was helpfully named "area\_of\_a\_circle", it takes one
+argument that we will call radius. It then uses this radius to get the
+area and then returns it. Now, whenever I want to get the area of some
+circle, I simply call area\_of\_a\_circle() and place the radius in the
+middle of the parentheses.
+
+Python has many functions, but we will be writing our own very often.
+
+    \paragraph{Loops}\label{loops}
+
+    We will be doing a lot of repetative things in Python. This doesn't mean
+we need to do a ton of copy and pasting, though. We can use loops to
+make this easy. For example, if we wanted to square each
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{k}{for} \PY{n}{number} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{]}\PY{p}{:}
+             \PY{n+nb}{print} \PY{p}{(}\PY{n}{number} \PY{o}{*} \PY{n}{number}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1
+4
+9
+16
+25
+
+    \end{Verbatim}
+
+    The range function makes this even easier,
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{k}{for} \PY{n}{number} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print} \PY{p}{(}\PY{n}{number} \PY{o}{*} \PY{n}{number}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0
+1
+4
+9
+16
+
+    \end{Verbatim}
+
+    Not exactly the same... the range function will start from 0 and go to
+the last number minus one. We can fix this by telling it to start at 1:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{k}{for} \PY{n}{number} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print} \PY{p}{(}\PY{n}{number} \PY{o}{*} \PY{n}{number}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1
+4
+9
+16
+25
+
+    \end{Verbatim}
+
+    We aren't limited to this, let's bring in another list:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{names} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Robert}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{John}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Sarah}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Qian}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ahmad}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{ages} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{26}\PY{p}{,} \PY{l+m+mi}{31}\PY{p}{,} \PY{l+m+mi}{29}\PY{p}{,} \PY{l+m+mi}{24}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{names}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{names}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ is }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{ages}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ years old.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Robert is 26 years old.
+John is 31 years old.
+Sarah is 29 years old.
+Qian is 24 years old.
+Ahmad is 30 years old.
+
+    \end{Verbatim}
+
+    \paragraph{Conditionals}\label{conditionals}
+
+    Sometimes we want to check something before deciding what to do next.
+For example,
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{k}{def} \PY{n+nf}{is\PYZus{}best\PYZus{}prof}\PY{p}{(}\PY{n}{name}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{name} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Adam}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+                 \PY{k}{return} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Yes!}\PY{l+s+s2}{\PYZdq{}}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{k}{return} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{No!}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n+nb}{print} \PY{p}{(}\PY{n}{is\PYZus{}best\PYZus{}prof}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Adam}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Yes!
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n+nb}{print} \PY{p}{(}\PY{n}{is\PYZus{}best\PYZus{}prof}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{John}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+No!
+
+    \end{Verbatim}
+
+    \paragraph{Packages}\label{packages}
+
+    Python has a ton of packages that make doing complicated stuff very
+easy. We won't discuss how to install packages, or give a detailed list
+of what packages exist, but we will give a brief description about how
+they are used. An easy way to think of why package are useful is by
+thinking: "Python packages give us access to MANY functions!"
+
+In this class we will use four packages very frequently: pandas,
+sklearn, matplotlib, and numpy:
+
+\begin{itemize}
+\tightlist
+\item
+  pandas is a data manipulation package. It let's you store data in data
+  frames. More on this next class.
+\item
+  sklearn is a machine learning and data science package. It let's you
+  do fairly complicated machine learning tasks, such as running
+  regressions and building classification models with only a few lines
+  of code!
+\item
+  matplotlib let's you make nice looking plots.
+\item
+  numpy (pronounced num-pie) is used for doing "math stuff" such as
+  complex math operations (e.g., square roots, exponents, logs) and give
+  you complex matrix operation abilities. If it's confusing as to why
+  this is useful, don't worry. As we use them throughout the semester,
+  their usefulness will become apparent.
+\end{itemize}
+
+To make the contents of a package useful, you need to import it:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{k+kn}{import} \PY{n+nn}{pandas}
+         \PY{k+kn}{import} \PY{n+nn}{sklearn}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}
+         \PY{k+kn}{import} \PY{n+nn}{numpy}
+\end{Verbatim}
+
+
+    We can now use some package specific things. For example, numpy has a
+function called sqrt() which will give us the square root of a numpy.
+Since it is part of numpy, we need to tell Python that's where it is by
+using a dot.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{n}{numpy}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{l+m+mi}{25}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}49}]:} 5.0
+\end{Verbatim}
+            
+    You may have noticed that earlier, when we added stuff to our list, we
+used .append(). This is very similar! Here, we told Python that numpy
+had a function called sqrt() that we would like to use. Earlier, we told
+Python that our list (and all lists!) had a function called append()
+that we would like to use.
+
+That's all we say about packages for now. Soon, we will be using
+packages in every class. With practice, you will understand why they are
+so great!
+
+    \subsubsection{IPython Notebooks}\label{ipython-notebooks}
+
+    IPython notebooks make writing Python code easy and neat.
+
+    \paragraph{Auto complete}\label{auto-complete}
+
+    One of the most useful things about IPython notebook is its tab
+completion.
+
+Try this: click just after numpy. in the cell below and press Tab
+several times, slowly to view candidate functions you might want to call
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{numpy}\PY{o}{.}
+\end{Verbatim}
+
+
+    \paragraph{Organisation}\label{organisation}
+
+    We typically read IPython notebooks from top to bottom. This means that
+if a cell relies on a variable or function that was created earlier in
+the notebook, you must run the corresponding cell to make that
+information available! For example, if I set the variable age equal to
+26 in the next cell,
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{n}{age} \PY{o}{=} \PY{l+m+mi}{26}
+\end{Verbatim}
+
+
+    but don't run it, it will not be available in the next cell:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I am }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{age}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ years old!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+I am 26 years old!
+
+    \end{Verbatim}
+
+    Now, this does not mean you have to run everything from top to bottom.
+You could define age later in the notebook, and then scroll up and run
+any other cells that require it. However, this is bad practice. How is
+someone supposed to know to scroll down first!? The IPython notebook
+will always remember the cells in the order you run them. This means you
+can overwrite variables!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n}{gender} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{male}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{n+nb}{print} \PY{p}{(}\PY{n}{gender}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+male
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{n}{gender} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{female}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{n+nb}{print} \PY{p}{(}\PY{n}{gender}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+female
+
+    \end{Verbatim}
+
+    This can get confusing. Notice that the number in the "In {[}\#{]}:"
+statement will always increase by one for every cell you run. This will
+make keeping track of everything a little easier. But it is recommended
+to always recommend organizing from top to bottom.
+
+    \paragraph{Saving}\label{saving}
+
+    There is an autosave feature and you can also use the save button in the
+menu or toolbar.
+
+    \subsubsection{Further Information}\label{further-information}
+
+    The resources here are endless; but people learn things in different
+ways. Some people prefer books, others like being taught through
+lessons, and others just learn by doing. I, unfortunately, learn by
+doing which means that I'm not an expert on which resources are the
+best.
+
+\begin{itemize}
+\tightlist
+\item
+  icourse163.org has python courses.
+\item
+  Codecademy's Python Course will give you a great foundation for
+  Python.
+\item
+  The online book, Diving into Python, has proven to be useful for many
+  people.
+\item
+  ...
+\item
+  Personally, I try to think of a cool project I want to work on and I
+  just try to do it. For example, trying to build a simple interactive
+  text game can be fun. Since you are just jumping in and doing Python,
+  this will lead to a ton of furious searching online. This is normal.
+  This is actually how professional programmers work every day...
+  Stackoverflow.com for instance has an answer to any programming
+  question you can imagine!
+\end{itemize}
+
+    \subsubsection{Coding Questions}\label{coding-questions}
+
+    To master your new found knowledge of Python, you should try these
+hands-on examples.
+
+    1. Create a list of 5 fruits (make sure to include an apple).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{my\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{apple}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pear}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{orange}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pinapple}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mandarin}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{my\PYZus{}list}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} ['apple', 'pear', 'orange', 'pinapple', 'mandarin']
+\end{Verbatim}
+            
+    2. Go through each fruit and check if it is an apple. If it is, print
+out "I found it!". If it's not an apple, do nothing.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k}{for}  \PY{n}{fruit} \PY{o+ow}{in} \PY{n}{my\PYZus{}list} \PY{p}{:}
+             \PY{k}{if} \PY{p}{(}\PY{n}{fruit} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{apple}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{found it!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+found it!
+
+    \end{Verbatim}
+
+    3. Add two new fruits to your list.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{my\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bannana}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{my\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kiwi}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{my\PYZus{}list}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} ['apple', 'pear', 'orange', 'pinapple', 'mandarin', 'bannana', 'kiwi']
+\end{Verbatim}
+            
+    4. Create a new empty list. Go through your list of fruits, and for each
+one, add an entry to the new list that tells us how many letters each
+fruit name is.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{k}{for}  \PY{n}{fruit} \PY{o+ow}{in} \PY{n}{my\PYZus{}list} \PY{p}{:}
+             \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}:s\PYZcb{}}\PY{l+s+s2}{ has }\PY{l+s+si}{\PYZob{}:d\PYZcb{}}\PY{l+s+s2}{ letters}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{fruit}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{fruit}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+apple has 5 letters
+pear has 4 letters
+orange has 6 letters
+pinapple has 8 letters
+mandarin has 8 letters
+bannana has 7 letters
+kiwi has 4 letters
+
+    \end{Verbatim}
+
+    5. Make a function called half\_squared that takes a list and returns a
+new list where each element of the original is squared and then divided
+in half.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{k}{def} \PY{n+nf}{half\PYZus{}squared}\PY{p}{(}\PY{n}{input\PYZus{}list}\PY{p}{)}\PY{p}{:}
+             \PY{n}{output\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]} \PY{c+c1}{\PYZsh{} What should we do?}
+             \PY{k}{for} \PY{n}{element} \PY{o+ow}{in} \PY{n}{input\PYZus{}list}\PY{p}{:}
+                 \PY{n}{output\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{element}\PY{o}{*}\PY{n}{element}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{k}{return} \PY{n}{output\PYZus{}list}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} test the function}
+         \PY{n}{half\PYZus{}squared}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)} \PY{o}{==} \PY{p}{[}\PY{l+m+mf}{4.5}\PY{p}{,}\PY{l+m+mf}{4.5}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}36}]:} True
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
